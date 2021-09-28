@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies App</title>
+</head>
+<body>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    const form = $('<form>');
+    const title = $('<label>').text('Movie').addClass('title');
+    const titleInput = $('<input>').addClass('title-input');
+    const rate = $('<label>').text('Rate').addClass('rate');
+    const rateInput = $('<input>').addClass('rate-input');
+    const submitBtn = $('<button>').text('Submit').addClass('submit-btn');
+    const movieList = $('<ul>');
+
+    $('body').append(form);
+    $('form').append(title).append(rate).append(submitBtn).append(movieList);
+    $('.title').append(titleInput);
+    $('.rate').append(rateInput);
+
+    $('form').on('submit', function(event) {
+      event.preventDefault();
+      const titleValue = $(titleInput.val());
+      const rateValue = $(rateInput.val());
+      const movie = $('<li>').text(titleInput.val() + '     ' + rateInput.val()).attr('id', Math.random());
+      const removeBtn = $('<button>').addClass('remove-btn').text('Remove');
+      $('ul').append(movie);
+      $('li').append(removeBtn);
+      $(form).trigger('reset');
+      console.log(movieList.length);
+    })
+
+    $('.remove-btn').on('click', function(event) {
+      event.preventDefault();
+      $(this).parent('li').remove();
+    })
+  </script>
+</body>
+</html>
